@@ -1,18 +1,41 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include "pieces.h"
+
 #include <array>
+#include <iostream>
 
 
-class Board{
+
+class Board {
 public:
+    static constexpr int BOARD_SIZE = 8;
+ 
+
     Board();
+    ~Board();
 
-    void printBoard();
+    bool isSquareOccupied(int x, int y) const;
+    bool placePiece(Piece* piece, int x, int y);
+    void setupInitialPosition();
+    void printBoard() const;
 
 
-private:
-    std::array<int, 64> board;
+    
+
+protected:
+ // 8x8 board represented as a 2D array
+
+    void clearBoard();
+
+    std::array<std::array<Piece* , BOARD_SIZE>, BOARD_SIZE> squares;
+
 };
 
 #endif // BOARD_H
+
+
+
+
+
