@@ -1,3 +1,4 @@
+
 #ifndef PIECES_H
 #define PIECES_H
 
@@ -6,7 +7,9 @@
 #include <array>
 #include <string>
 #include <iostream>
+#include "board.h"
 
+class Board; // Forward declaration
 
 
 
@@ -35,7 +38,7 @@ class Piece{
         virtual bool hasMoved();
         virtual bool setMoved();
         virtual std::vector<std::pair<int, int>> getPossibleMoves(int xs, int ys);
-        virtual std::vector<std::pair<int, int>> getLegalMoves(int xs, int ys);
+        virtual std::vector<std::pair<int, int>> getLegalMoves(Board &board, int xs, int ys);
     
     protected:
         Colour colour;
@@ -61,6 +64,7 @@ class Rook : public Piece {
         Rook(Colour colour, Type type, bool moved = false);
         ~Rook() override;
         std::vector<std::pair<int, int>> getPossibleMoves(int xs, int ys) override;
+        std::vector<std::pair<int,int>> getLegalMoves(Board &board, int xs, int ys) override;
         
         
 };

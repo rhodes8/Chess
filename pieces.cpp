@@ -1,10 +1,11 @@
 #include "pieces.h"
+#include "board.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
-#include "pieces.h"
+#include <array>
 
 
 
@@ -44,7 +45,7 @@ std::vector<std::pair<int, int>> Piece::getPossibleMoves(int xs, int ys) {
     return {};
 }
 
-std::vector<std::pair<int, int>> Piece::getLegalMoves(int xs, int ys) {
+std::vector<std::pair<int, int>> Piece::getLegalMoves(Board &board, int xs, int ys) {
     return {};
 }
 
@@ -69,6 +70,30 @@ std::vector<std::pair<int,int>> Rook::getPossibleMoves(int xs, int ys) {
         if (i != ys) moves.emplace_back(xs, i); // Horizontal moves
     }
     return moves;
+}
+
+std::vector<std::pair<int,int>> Rook::getLegalMoves(Board &board, int xs, int ys){
+    std::vector<std::pair<int, int>> possibleMoves{getPossibleMoves(xs, ys)};
+    std::vector<std::pair<int, int>> legalMoves;
+    for(auto &move : possibleMoves){
+        int moveX = move.first;
+        int moveY = move.second;
+        if(board.getPiece(moveX, moveY) != nullptr){
+            if(board.getPiece(moveX, moveY)->getColour() == this->getColour()){
+                continue; // Can't capture own piece
+            } else {
+                legalMoves.emplace_back(moveX, moveY); // Can capture opponent's piece
+                continue; // Stop further moves in this direction
+            }
+        } else {
+            legalMoves.emplace_back(moveX, moveY); // Empty square
+        }
+
+
+        
+    }
+    return legalMoves;
+
 }
 
 

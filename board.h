@@ -6,6 +6,8 @@
 #include <array>
 #include <iostream>
 
+class Piece; // Forward declaration
+
 
 
 class Board {
@@ -18,6 +20,7 @@ public:
 
     bool isSquareOccupied(int x, int y) const;
     bool placePiece(Piece* piece, int x, int y);
+    Piece* getPiece(int x, int y);
     void setupInitialPosition();
     void printBoard() const;
 

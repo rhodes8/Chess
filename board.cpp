@@ -1,6 +1,10 @@
 #include <iostream>
 #include <memory>
+#include <array>
 #include "board.h"
+
+
+
 
 
 Board::Board() {
@@ -47,6 +51,13 @@ bool Board::isSquareOccupied(int x, int y) const {
         return false; // Out of bounds
     }
     return squares[x][y] != nullptr;
+}
+
+Piece* Board::getPiece(int x, int y) {
+    if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
+        return nullptr; // Out of bounds
+    }
+    return squares[x][y];
 }
 
 
