@@ -8,6 +8,11 @@
 
 class Piece; // Forward declaration
 
+struct Position{
+    int x;
+    int y;
+};
+
 
 
 class Board {
@@ -21,6 +26,7 @@ public:
     bool isSquareOccupied(int x, int y) const;
     bool placePiece(Piece* piece, int x, int y);
     Piece* getPiece(int x, int y);
+    bool removePiece(int x, int y);
     void setupInitialPosition();
     void printBoard() const;
 

@@ -3,8 +3,7 @@
 #include <array>
 #include "board.h"
 
-
-
+class Piece; // Forward declaration
 
 
 Board::Board() {
@@ -55,10 +54,14 @@ bool Board::isSquareOccupied(int x, int y) const {
 
 Piece* Board::getPiece(int x, int y) {
     if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
-        return nullptr; // Out of bounds
+        return nullptr;
     }
     return squares[x][y];
 }
+
+
+
+
 
 
 bool Board::placePiece(Piece* piece, int x, int y) {
@@ -73,6 +76,20 @@ bool Board::placePiece(Piece* piece, int x, int y) {
     squares[x][y] = piece;
     return true;
 
+}
+
+bool Board::removePiece(int x, int y) {
+    if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
+        std::cerr << "Invalid position!" << std::endl;
+        return false;
+    }
+    if (squares[x][y] == nullptr) {
+        std::cerr << "Square is already empty!" << std::endl;
+        return false;
+    }
+    delete squares[x][y]; // Free memory
+    squares[x][y] = nullptr; // Set square to empty
+    return true;
 }
 
 void Board::setupInitialPosition() {
