@@ -1,6 +1,6 @@
-Hi, I am making a chess game in C++. I am a C++ noob and also a Git noob.
+Hi, I am making a chess game in C++
 
-I am currently chipping away at this project while learning C++
+I am currently chipping away at this project while continuing my learning of C++
 
 After I have build a C++ application that I can play chess on, I plan to build a Chess bot to play Chess versus.
-I plan to do this using bitboards.
+I hope to use bitboards in order to speed move generations up.
