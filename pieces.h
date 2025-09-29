@@ -91,6 +91,7 @@ class Queen : public Piece {
     public:
         Queen(Colour colour, Type type, bool moved = false);
         ~Queen() override;
+        std::vector<std::pair<int,int>> getLegalMoves(Board board&, int xs, int ys);
         
 };
 

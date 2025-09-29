@@ -186,6 +186,28 @@ std::vector<std::pair<int,int>> Knight::getLegalMoves(Board &board, int xs, int 
 
 Queen::Queen(Colour colour, Type type, bool moved) : Piece(colour, Type::queen, moved) {}
 Queen::~Queen() = default;
+std::vector<std::pair<int,int>> Queen::getLegalMoves(Board &board, int xs, int ys){
+    std::vector<std::pair<int,int>> legalMoves{};
+    const int moves[8][2] = {
+        {0, 1}, {1, 1}, {1, 0}, {1, -1}, 
+        {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}
+        
+    };
+    for (const auto& move : moves){
+        int x = xs + move[0];
+        int y = ys + move[1];
+
+        if (x >= 0 && x < Board::BOARD_SIZE && y >= 0 && y < Board::BOARD_SIZE) {
+            if (!board.isSquareOccupied(x, y) || board.getPiece(x, y)->getColour() != this->getColour()) {
+                legalMoves.emplace_back(x, y);
+            }
+        }
+
+    }
+    return legalMoves;
+    
+
+}
 
 King::King(Colour colour, Type type, bool moved) : Piece(colour, Type::king, moved) {}
 King::~King() = default;
