@@ -168,15 +168,21 @@ std::vector<std::pair<int,int>> Knight::getLegalMoves(Board &board, int xs, int 
     for (const auto& move : moves){
         int x = xs + move[0];
         int y = ys + move[1];
-        if (x >= 0 && x < Board::BOARD_SIZE && y >= 0 && y < Board::BOARD_SIZE) {
-            if (!board.isSquareOccupied(x, y) || board.getPiece(x, y)->getColour() != this->getColour()) {
-                legalMoves.emplace_back(x, y);
+        while(x >= 0 && x < Board::BOARD_SIZE && y >= 0 && y < Board::BOARD_SIZE){
+            if (board.isSquareOccupied(x,y)){
+                if(board.getPiece(x, y)->getColour() != this->getColour()){
+                    legalMoves.emplace_back(x,y);
+                }
+                break;
             }
+            legalMoves.emplace_back(x,y);
+            x += dir[0];
+            y += dir[1];
         }
+
     }
     return legalMoves;
 }
-
 
 
 
